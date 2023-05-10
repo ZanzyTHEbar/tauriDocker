@@ -30,7 +30,7 @@ This is a custom Docker image for [Tauri](https://tauri.app/).
 ### Docker
 
 ```bash
-docker run --name tauridocker -v ~/app:/workspace ghcr.io/zanzythebar/vc_tauridocker:latest
+docker run --name tauridocker -v ~/app:/workspace ghcr.io/zanzythebar/tauridocker:latest
 ```
 
 > **Note**: Volume mounting is currently in development and may not work as expected. Please make a `pr` if you find any issues.
