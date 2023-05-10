@@ -1,0 +1,16 @@
+#!/bin/bash
+
+VOLUME_CONTAINER_NAME=vc_tauridocker
+VOLUME_CONTAINER_IMAGE=ghcr.io/zanzythebar/vc_tauridocker:latest
+IMAGE_NAME=ghcr.io/zanzythebar/tauridocker:latest
+
+if [ ! "$(docker ps -a | grep $VOLUME_CONTAINER_NAME)" ]; then
+    docker run -u `id -u $USER`:`id -g $USER` --name $VOLUME_CONTAINER_NAME $VOLUME_CONTAINER_IMAGE
+fi
+
+docker run --rm \
+-v `pwd`:/workspace \
+--volumes-from=$VOLUME_CONTAINER_NAME \
+-u `id -u $USER`:`id -g $USER` \
+$IMAGE_NAME \
+$@
