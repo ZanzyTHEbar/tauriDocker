@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV NODE_VERSION="16.13.0"
+ENV NODE_VERSION="16"
 
 ENV APP_VERSION="1.3.0" \
     APP="tauri_app"
@@ -66,7 +66,10 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Check cargo is visible
 RUN cargo --help
 
-#USER 1000
+# Install Tauri and Rust packages
+RUN cargo install tauri-cli
+RUN cargo install tauri-bundler
+RUN cargo install cargo-edit
 
 WORKDIR /workspace
 
