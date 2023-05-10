@@ -47,7 +47,7 @@ RUN apt-get update
 # Get Node
 
 RUN apt install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | -E bash -
 RUN apt-get install -y nodejs
 RUN node --version
 RUN npm --version
