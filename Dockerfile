@@ -62,13 +62,11 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 #RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
 
 ENV PATH="/root/.cargo/bin:${PATH}"
-
 # Check cargo is visible
 RUN cargo --help
 
 # Install Tauri
 RUN cargo install tauri-cli
-RUN cargo install tauri-bundler
 RUN cargo install cargo-edit
 
 #USER 1000
