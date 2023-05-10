@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV NODE_VERSION="16"
+ENV NODE_VERSION="16.20.0"
 
 ENV APP_VERSION="1.3.0" \
     APP="tauri_app"
@@ -51,9 +51,10 @@ ENV NVM_DIR="/root/.nvm"
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
-RUN node --version
-RUN npm --version
+RUN ls -la ${NVM_DIR}/versions
+ENV PATH="${NVM_DIR}/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node -v
+RUN npm -v
 
 # Get Rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
