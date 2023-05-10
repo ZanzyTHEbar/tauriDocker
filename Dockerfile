@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV NODE_VERSION="v16"
+ENV NODE_VERSION="16"
 
 ENV APP_VERSION="1.3.0" \
     APP="tauri_app"
