@@ -45,12 +45,11 @@ RUN mkdir -p /workspace && \
 RUN apt-get update
 
 # Get Node
-
 RUN apt install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
-RUN node --version
-RUN npm --version
+RUN node -v
+RUN npm -v
 
 # Get Rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
