@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV NODE_VERSION="18"
+ENV NODE_VERSION="v16"
 
 ENV APP_VERSION="1.3.0" \
     APP="tauri_app"
@@ -45,12 +45,15 @@ RUN mkdir -p /workspace && \
 RUN apt-get update
 
 # Get Node
-
 RUN apt install -y curl
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-RUN apt-get install -y nodejs
-RUN node -v
-RUN npm -v
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+ENV NVM_DIR="/root/.nvm"
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
 
 # Get Rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -62,10 +65,12 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Check cargo is visible
 RUN cargo --help
 
-# Install Tauri and Rust packages
+# Install Tauri
 RUN cargo install tauri-cli
 RUN cargo install tauri-bundler
 RUN cargo install cargo-edit
+
+#USER 1000
 
 WORKDIR /workspace
 
