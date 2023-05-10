@@ -66,7 +66,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Check cargo is visible
 RUN cargo --help
 
-USER 1001
+#USER 1000
 
 WORKDIR /workspace
 
