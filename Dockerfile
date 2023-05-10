@@ -1,11 +1,13 @@
 FROM ubuntu:18.04
 
+ENV NODE_VERSION="16.13.0"
+
 ENV APP_VERSION="1.3.0" \
-    APP="tauri-app" \
+    APP="tauri_app"
 
 LABEL app.name="${APP}" \
-    app.version="${APP_VERSION}" \
-    maintainer="DaOfficialWizard <pyr0ndet0s97@gmail.com>"
+      app.version="${APP_VERSION}" \
+      maintainer="DaOfficialWizard <pyr0ndet0s97@gmail.com>"
 
 # Update default packages
 RUN apt-get -qq update
@@ -43,10 +45,10 @@ RUN mkdir -p /workspace && \
 RUN apt-get update
 
 # Get Node
-ENV NODE_VERSION=16.13.0
+
 RUN apt install -y curl
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-ENV NVM_DIR=/root/.nvm
+ENV NVM_DIR="/root/.nvm"
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
