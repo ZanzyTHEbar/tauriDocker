@@ -29,38 +29,38 @@ This is a custom Docker image for [Tauri](https://tauri.app/).
 
 ```yaml
 - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          token: ${{ env.GITHUB_TOKEN }}
-      - name: Build the App (Linux)
-        if: matrix.platform == 'ubuntu-latest'
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ghcr.io/zanzythebar/tauridocker:latest
-          options: -v ${{ github.workspace }}:/workspace
-          run: |
-            echo "::group::install node dependencies"
-            npm install -g pnpm
-            npm install -g typescript
-            pnpm install
-            echo "::group::tauri build"
-            pnpm tauri build
-            echo "::endgroup::"
-      - name: Archive the App (Linux)
-        if: matrix.platform == 'ubuntu-latest'
-        uses: actions/upload-artifact@v3
-        with:
-          name: production-files
-          path: |
-            src-tauri/target/release/bundle/deb/*.deb
-            src-tauri/target/release/bundle/appimage/*.AppImage
-          retention-days: 5
-          if-no-files-found: error
-      - name: Verify build (Linux)
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          ls -la src-tauri/target/release/bundle/appimage
-          ls -la src-tauri/target/release/bundle/deb
+  uses: actions/checkout@v3
+  with:
+    token: ${{ env.GITHUB_TOKEN }}
+- name: Build the App (Linux)
+  if: matrix.platform == 'ubuntu-latest'
+  uses: addnab/docker-run-action@v3
+  with:
+    image: ghcr.io/zanzythebar/tauridocker:latest
+    options: -v ${{ github.workspace }}:/workspace
+    run: |
+      echo "::group::install node dependencies"
+      npm install -g pnpm
+      npm install -g typescript
+      pnpm install
+      echo "::group::tauri build"
+      pnpm tauri build
+      echo "::endgroup::"
+- name: Archive the App (Linux)
+  if: matrix.platform == 'ubuntu-latest'
+  uses: actions/upload-artifact@v3
+  with:
+    name: production-files
+    path: |
+      src-tauri/target/release/bundle/deb/*.deb
+      src-tauri/target/release/bundle/appimage/*.AppImage
+    retention-days: 5
+    if-no-files-found: error
+- name: Verify build (Linux)
+  if: matrix.platform == 'ubuntu-latest'
+  run: |
+    ls -la src-tauri/target/release/bundle/appimage
+    ls -la src-tauri/target/release/bundle/deb
 ```
 
 ### Docker
