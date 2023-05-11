@@ -27,7 +27,7 @@ This is a custom Docker image for [Tauri](https://tauri.app/).
     ls -la build
 ```
 
-```
+```yaml
 - name: Checkout repository
         uses: actions/checkout@v3
         with:
