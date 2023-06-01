@@ -1,2 +1,9 @@
 .dockerignore
 tauri_script.sh
+node_modules/
+npm-debug.log
+.git/
+target/
+dist/
+.vscode/
+src-tauri/target/

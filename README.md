@@ -18,6 +18,7 @@ This is a custom Docker image for [Tauri](https://tauri.app/).
       echo "::group::install node dependencies"
       npm install -g pnpm
       npm install -g typescript
+      pnpm fetch
       pnpm install
       echo "::group::tauri build"
       pnpm tauri build 
@@ -42,6 +43,7 @@ This is a custom Docker image for [Tauri](https://tauri.app/).
       echo "::group::install node dependencies"
       npm install -g pnpm
       npm install -g typescript
+      pnpm fetch
       pnpm install
       echo "::group::tauri build"
       pnpm tauri build
